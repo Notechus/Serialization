@@ -21,3 +21,4 @@ Version 2.0:</br>
 •	Dodanie wsparcia GUI: otwieranie, edycja pliku binarnego, tworzenie wzorców(generacja kodu), serializacja i</br> deserializacja(powinna wywoływać odpowiednie polecenia konsolowe -> wsparcie wsteczne)</br>
 •	Dodanie archiwizacji(prawdopodobnie bez kompresji)</br>
 •	Dodanie funkcji skrótu, szczątkowe zabezpieczenia?</br>
+•	Dodanie dziennika zdarzeń, zapisywalnego do pliku tekstowego</br>
