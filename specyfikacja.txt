@@ -1,0 +1,54 @@
+• Serializacja I deserializacja typów maszynowych(int,long,short,double,float…) oraz tablic tych typów
+• Dodanie użytecznych predefiniowanych
+• Możliwość definiowania swoich typów(prostych: struktura mająca <=10 składowych)
+typów(Zespolone, Wymierne, Punkt, Prosta…)
+• Kodowanie binarnego formatu do pliku tekstowego lub do konsoli/wyjścia
+• Format pliku binarnego: HEADER DATA FOOTER
+• HEADER:
+1. [2bajty] – skrótowa nazwa/identyfikator typu
+2. [2bajty] – wersja(minimalna + maksymalna), która może obsłużyć plik
+3. [1bajt+] – flagi, bitfield?
+• DATA:
+1. Struktura: [2] długość nazwy, [?] nazwa, [2] ilość pól(mniejsza od 10) , [?] pola
+Pole: [1] typ, [2] rozmiar, [2] dł. nazwy [?] nazwa [?], [?] wartość
+2. Tablice: [2] dł. Nazwy, [?] nazwa, [2] typ, [4/2] ilość el., [?] dane
+• FOOTER:
+Sposób na zakończenie pliku(może być nawet 0x11 albo 0x1234)
+Version 2.0:
+• Dodanie wsparcia GUI: otwieranie, edycja pliku binarnego, tworzenie wzorców(generacja kodu), serializacja i
+deserializacja(powinna wywoływać odpowiednie polecenia konsolowe -> wsparcie wsteczne)
+• Dodanie archiwizacji(prawdopodobnie bez kompresji)
+• Dodanie funkcji skrótu, szczątkowe zabezpieczenia?
+• Dodanie dziennika zdarzeń, zapisywalnego do pliku tekstowego
+
+
+Serializator
+Aplikacja konsolowa przeznaczona do konwersji danych podanych przez użytkownika na zapis binarny oraz ich
+zapisanie do odpowiedniego pliku, bądź otwarcie pliku binarnego i konwersja zawartych w nim danych na zrozumiały dla użytkownika zapis.
+Przykład:
+	Podana liczba zespolona 1 + 2i zostanie zapisana na pewien ciąg bitów 010101010101010101010101(tutaj losowe), a następnie będzie
+	mogła zostać odczytana z pliku i być zamieniona z powrotem na postać 1 + 2i
+
+Interfejs użytkownika:
+1. serializuj [typ] [plik] -> otwiera dany plik i przenosi nas do wprowadzania danych zadanego typu
+2. deserializuj [typ] [plik] -> otwiera dany plik i odczytuje z niego dane, po czym wpisuje je na ekran
+3. tworz [typ] [parametry] -> tworzy typ o danej nazwie, parametrach i zapisuje jego szablon, po czym dodaje go do istniejących szablonów
+4. usuń [typ] -> jeśli dany typ istnieje, usuwa go z istniejących szablonów. Nie da się usunąć typów wbudowanych w program
+5. pokaż [typ] -> pokazuje strukturę danego typu(typ, rodzaj i ilość atrybutów)
+6. pokaż_typy -> pokazuje listę wszystkich typów
+. ustawienia -> możliwość ustawienia kompresji? i innych ustawień
+. koniec -> zamyka program
+
+Format pliku(prawdopodobnie będą to pliki bez rozszerzenia):
+	HEADER:
+	1. [2bajty] – skrótowa nazwa/identyfikator typu
+	2. [2bajty] – wersja(minimalna + maksymalna), która może obsłużyć plik
+	3. [1bajt+] – flagi, bitfield?
+	DATA:
+	1. Struktura: [2] długość nazwy, [?] nazwa, [2] ilość pól(mniejsza od 10) , [?] pola
+	Pole: [1] typ, [2] rozmiar, [2] dł. nazwy [?] nazwa [?], [?] wartość
+	2. Tablice: [2] dł. Nazwy, [?] nazwa, [2] typ, [4/2] ilość el., [?] dane
+	FOOTER:
+	[2bajty] 0x53 0x50 (SP)
+
+	
